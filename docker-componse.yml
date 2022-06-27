@@ -1,0 +1,25 @@
+version: '1'
+
+services:
+  backend:
+    image: marketplace/service-recommendations
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - backend_data:/app
+    ports:
+      - '10.0.0.91:50051:50051'
+    networks:
+       marketplace_network:
+      ipv4_address: 172.20.0.5
+volumes:
+  backend:
+
+networks:
+  marketplace_network:
+  driver: bridge
+  ipam:
+    driver: default
+    config:
+      subnet: 172.20.0.0/24

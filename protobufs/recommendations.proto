@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+enum BookCategory{
+    MYSTERY = 0;
+    SCIENCE_FICTION = 1;
+    SELF_HELP = 2;
+}
+
+message RecommendationRequest{
+    BookRecommendation recommendation = 1;
+}
+
+message BookRecommendation{
+    int32 id = 1;
+    string title = 2;
+}
+
+message CreateRecommendationRequest{
+    BookRecommendation recommendation = 1;
+}
+
+message CreateRecommendationResponse{
+    BookRecommendation recommendation = 1;
+    string status = 2;
+}
+
+message UpdateRecommendationRequest{
+    BookRecommendation old_recommendation = 1;
+    BookRecommendation new_recommendation = 2;
+}
+
+message UpdateRecommendationResponse{
+    BookRecommendation old_recommendation = 1;
+    string status = 2;
+}
+
+message DeleteRecommendationRequest{
+    BookRecommendation recommendation = 1;
+}
+
+message DeleteRecommendationResponse{
+    BookRecommendation recommendation = 1;
+    string status = 2;
+}
+
+message RecommendationResponse{
+    repeated BookRecommendation recommendations = 1;
+}
+
+service Recommendations{
+    rpc Recommend (RecommendationRequest) returns (RecommendationResponse);
+    rpc Create (CreateRecommendationRequest) returns (CreateRecommendationResponse);
+    rpc Update (UpdateRecommendationRequest) returns (UpdateRecommendationResponse);
+    rpc Delete (DeleteRecommendationRequest) returns (DeleteRecommendationResponse);
+}
