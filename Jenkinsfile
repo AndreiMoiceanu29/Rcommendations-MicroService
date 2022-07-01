@@ -3,8 +3,19 @@ pipeline{
     stages{
         stage('Build'){
         steps{
-            sh 'echo "Hello World"'
+            sh 'echo "Building..."'
         }
+        }
+        stage("Static Code Analysis"){
+            steps{
+                    script {
+                    sh 'find . -name \\*.py | xargs pylint -f parseable | tee pylint.log'
+                    recordIssues(
+                        tool: pyLint(pattern: 'pylint.log'),
+                        unstableTotalHigh: 100,
+                    )
+                }
+            }
         }
         stage('Test'){
         steps{
