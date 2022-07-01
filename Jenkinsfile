@@ -8,7 +8,9 @@ pipeline{
         }
         stage('Requirements'){
         steps{
+            script{
             sh 'pip install -r requirements.txt'
+            }
         }
         }
         stage("Static Code Analysis"){
