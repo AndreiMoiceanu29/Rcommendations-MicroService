@@ -6,6 +6,11 @@ pipeline{
             sh 'echo "Building..."'
         }
         }
+        stage('Requirements'){
+        steps{
+            sh 'pip install -r requirements.txt'
+        }
+        }
         stage("Static Code Analysis"){
             steps{
                     script {
