@@ -19,7 +19,7 @@ pipeline{
                     sh 'find . -name \\*.py | xargs pylint -f parseable | tee pylint.log'
                     recordIssues(
                         tool: pyLint(pattern: 'pylint.log'),
-                        unstableTotalHigh: 1,
+                        failedTotalHigh: 1,
                     )
                 }
             }
